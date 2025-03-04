@@ -1,1 +1,11 @@
-<p>movies-item works!</p>
+<a
+  href="#"
+  class="list-group-item"
+  [routerLink]="[movie.id]"
+  routerLinkActive="active">
+  <div class="movie-item">
+    <span class="movie-title">{{ movie.title }}</span>
+    <hr>
+    <span class="movie-description">{{ movie.description }}</span>
+  </div>
+</a>

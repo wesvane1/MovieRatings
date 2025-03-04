@@ -13,6 +13,7 @@ import { MoviesListComponent } from './movies/movies-list/movies-list.component'
 import { MoviesItemComponent } from './movies/movies-item/movies-item.component';
 import { MoviesFilterPipe } from './movies/movies.filter-pipe';
 import { MoviesService } from './movies/movies.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MoviesService } from './movies/movies.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [
     MoviesService

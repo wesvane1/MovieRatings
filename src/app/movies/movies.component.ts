@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Movie } from './movies.model';
+import { MoviesService } from './movies.service';
 
 @Component({
   selector: 'app-movies',
@@ -7,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrl: './movies.component.scss'
 })
 export class MoviesComponent {
+
+  selectedMovie: Movie | undefined
+
+  constructor(
+    private readonly moviesService: MoviesService,
+  ){}
+
+  ngOnInit(){
+    this.moviesService.movieSelectedEvent.subscribe(
+      (movie: Movie) => {
+        this.selectedMovie = movie
+      }
+    )
+  }
 
 }

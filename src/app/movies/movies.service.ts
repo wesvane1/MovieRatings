@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Movie } from './movies.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
@@ -10,6 +10,7 @@ export class MoviesService {
 
   private movies: Movie[] = [];
   private maxMovieId = 0;
+  movieSelectedEvent = new EventEmitter<Movie>();
   movieListChangedEvent = new Subject<Movie[]>();
 
   constructor(

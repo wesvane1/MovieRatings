@@ -1,1 +1,34 @@
-<p>movies-list works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading movie-list-head">
+    <div class="col-xs-6">
+      <h1>Movies</h1>
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-success pull-right" routerLink="new">New Movie</button>
+    </div>
+      <div class="input-group col-xs-7 pad-left-right">
+        <span class="glyphicon glyphicon-search input-group-addon"></span>
+        <input
+          #searchBox
+          type="text"
+          class="form-control"
+          placeholder="Search movies..."
+          (input)="search(searchBox.value)"
+        />
+      </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="col-xs-12">
+      <div class="list-group contacts-list">
+        <!-- <app-movies-item
+          *ngFor="let movieElement of movieList | moviesFilter:term"
+          [movie]="movieElement">
+        </app-movies-item> -->
+        <app-movies-item
+          *ngFor="let movieElement of movieList | moviesFilter:term">
+        </app-movies-item>
+      </div>
+    </div>
+  </div>
+</div>

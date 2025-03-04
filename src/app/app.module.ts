@@ -10,6 +10,9 @@ import { ReviewsDetailComponent } from './reviews/reviews-detail/reviews-detail.
 import { ReviewsListComponent } from './reviews/reviews-list/reviews-list.component';
 import { MoviesDetailComponent } from './movies/movies-detail/movies-detail.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { MoviesItemComponent } from './movies/movies-item/movies-item.component';
+import { MoviesFilterPipe } from './movies/movies.filter-pipe';
+import { MoviesService } from './movies/movies.service';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,17 @@ import { MoviesListComponent } from './movies/movies-list/movies-list.component'
     ReviewsDetailComponent,
     ReviewsListComponent,
     MoviesDetailComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    MoviesItemComponent,
+    MoviesFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    MoviesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

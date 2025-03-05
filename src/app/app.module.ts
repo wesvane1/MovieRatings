@@ -16,6 +16,7 @@ import { MoviesService } from './movies/movies.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
 import { FormsModule } from '@angular/forms';
+import { ReviewsItemComponent } from './reviews/reviews-item/reviews-item.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     MoviesListComponent,
     MoviesItemComponent,
     MoviesFilterPipe,
-    MoviesEditComponent
+    MoviesEditComponent,
+    ReviewsItemComponent
   ],
   imports: [
     BrowserModule,

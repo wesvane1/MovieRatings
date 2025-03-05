@@ -14,9 +14,9 @@ const appRoutes: Routes = [
     {path: ':id/edit', component: MoviesEditComponent},
   ]},
   {path: 'reviews', component: ReviewsComponent, children: [
-    // {path: 'new', component: ContactEditComponent},
-    {path: ':id', component: ReviewsDetailComponent},
-    // {path: ':id/edit', component: ContactEditComponent},
+    // {path: ':movieId/new', component: ContactEditComponent},
+    {path: ':movieId/:reviewId', component: ReviewsDetailComponent},
+    // {path: ':movieId/:reviewId/edit', component: ContactEditComponent},
   ]},
 ];
 

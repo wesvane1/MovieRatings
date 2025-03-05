@@ -14,6 +14,7 @@ import { MoviesItemComponent } from './movies/movies-item/movies-item.component'
 import { MoviesFilterPipe } from './movies/movies.filter-pipe';
 import { MoviesService } from './movies/movies.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     MoviesDetailComponent,
     MoviesListComponent,
     MoviesItemComponent,
-    MoviesFilterPipe
+    MoviesFilterPipe,
+    MoviesEditComponent
   ],
   imports: [
     BrowserModule,

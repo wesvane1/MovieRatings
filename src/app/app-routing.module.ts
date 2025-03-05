@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   ]},
   {path: 'reviews', component: ReviewsComponent, children: [
     // {path: ':movieId/new', component: ContactEditComponent},
-    {path: ':movieId/:reviewId', component: ReviewsDetailComponent},
+    {path: ':movieId', component: ReviewsDetailComponent},
     // {path: ':movieId/:reviewId/edit', component: ContactEditComponent},
   ]},
 ];

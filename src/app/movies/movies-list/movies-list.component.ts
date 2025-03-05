@@ -11,11 +11,7 @@ import { MoviesService } from '../movies.service';
 export class MoviesListComponent implements OnInit{
 
   // movieList: Movie[] = []
-  movieList: Movie[] = [
-    new Movie('1', 'Test1Title', 'Test1Description', null),
-    new Movie('2', 'Test2Title', 'Test2Description', null),
-    new Movie('3', 'Test3Title', 'Test3Description', null),
-  ]
+  movieList: Movie[] = []
   term: string = '';
 
   constructor(
@@ -23,8 +19,8 @@ export class MoviesListComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    this.movieList = this.movieList
-    // this.movieList = this.moviesService.getMovies()
+    // this.movieList = this.movieList
+    this.movieList = this.moviesService.getMovies()
   }
 
   search(value: string) {

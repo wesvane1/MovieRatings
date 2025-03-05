@@ -10,7 +10,7 @@ import { MoviesService } from './movies.service';
 })
 export class MoviesComponent {
 
-  selectedMovie: Movie | undefined
+  selectedMovie: Movie;
 
   constructor(
     private readonly moviesService: MoviesService,

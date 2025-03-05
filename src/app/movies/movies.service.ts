@@ -21,7 +21,7 @@ export class MoviesService {
   }
 
   getMovies(): Movie[]{
-    this.http.get<Movie[]>('http://localhost:3000/movies').subscribe((movies: Movie[]) => {
+    this.http.get<Movie[]>('http://localhost:3000/movie').subscribe((movies: Movie[]) => {
       this.movies = movies;
       this.maxMovieId = this.getMaxId();
 
@@ -33,6 +33,36 @@ export class MoviesService {
     })
     return this.movies.slice();
   }
+  getMovie(id: string): Movie {
+    for (const movie of this.movies) {
+      if (movie.id === id) {
+        return movie;
+      }
+    }
+    return null; // PROBLEM: returning null
+  }
+  // getMovie(id: string): Movie | undefined {
+  //   return this.movies.find(movie => movie.id === id);
+  // }
+  
+  
+  deleteMovie(movie: Movie) {
+    if (!movie) {
+      return;
+    }
+    const pos = this.movies.findIndex(d => d.id === movie.id);
+    if (pos < 0) {
+      return;
+    }
+    // delete from database
+    this.http.delete('http://localhost:3000/movies/' + movie.id)
+      .subscribe(
+        (response: Response) => {
+          this.movies.splice(pos, 1);
+          this.sortAndSend();
+        }
+      );
+  }
 
   getMaxId(): number{
     let maxId = 0;
@@ -43,5 +73,24 @@ export class MoviesService {
       }
     }
     return maxId;
+  }
+
+  sortAndSend() {
+    const moviesJSON = JSON.stringify(this.movies); // Convert documents to JSON string
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+    this.http.put(
+      'http://localhost:3000/movies', // Use your local Node.js server URL
+      moviesJSON,
+      { headers }
+    ).subscribe(
+      () => {
+        const movieListClone = this.movies.slice();
+        this.movieListChangedEvent.next(movieListClone);
+      },
+      (error) => {
+        console.error('Error storing movies:', error);
+      }
+    );
   }
 }

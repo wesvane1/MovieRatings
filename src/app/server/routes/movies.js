@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const maxMovieId = await sequenceGenerator.nextId("movies"); // ✅ Await the result
+    const maxMovieId = await sequenceGenerator.nextId("movies");
 
     const movie = new Movie({
       id: maxMovieId,

@@ -10,7 +10,6 @@ import { MoviesService } from '../movies.service';
 })
 export class MoviesListComponent implements OnInit{
 
-  // movieList: Movie[] = []
   movieList: Movie[] = []
   term: string = '';
 
@@ -19,7 +18,6 @@ export class MoviesListComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    // this.movieList = this.movieList
     this.movieList = this.moviesService.getMovies()
   }
 

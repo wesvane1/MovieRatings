@@ -22,9 +22,7 @@ export class MoviesDetailComponent implements OnInit{
   ngOnInit(){
     this.route.params.subscribe((params: Params) => {
       const movieId = params['id'];
-      console.log("MOVIE ID: ", movieId); // Debugging
       this.movie = this.moviesService.getMovie(movieId) || {} as Movie;
-      console.log("MOVIE: ", this.movie);
     });
     
   }

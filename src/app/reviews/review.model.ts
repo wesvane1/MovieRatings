@@ -1,21 +1,20 @@
+import { ObjectId } from 'mongodb';
+
 export class Review {
   public id: string;
-  public movieId: string;
-  public title: string;
-  public description: string;
-  public rating: number;
+  public movieId: ObjectId;
+  public textRating: string;
+  public starRating: number;
 
   constructor(
-    id: string, 
-    movieId: string, 
-    title: string, 
-    description: string, 
-    rating: number
+    id: string,
+    movieId: ObjectId,
+    textRating: string,
+    starRating: number
   ) {
     this.id = id;
     this.movieId = movieId;
-    this.title = title;
-    this.description = description;
-    this.rating = rating;
+    this.textRating = textRating;
+    this.starRating = starRating;
   }
 }

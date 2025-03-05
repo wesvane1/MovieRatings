@@ -9,8 +9,8 @@ var mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 
-// var index = require('./src/app/server/routes/app');
-// const messageRoutes = require('./src/app/server/routes/messages')
+var index = require('./src/app/server/routes/app');
+const movieRoutes = require('./src/app/server/routes/movies')
 // const contactRoutes = require('./src/app/server/routes/contacts')
 // const documentRoutes = require('./src/app/server/routes/documents')
 
@@ -43,17 +43,17 @@ app.use((req, res, next) => {
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, 'dist/cms/browser')));
+app.use(express.static(path.join(__dirname, 'dist/movieRatings/browser')));
 
 // Tell express to map the default route ('/') to the index route
 app.use('/', index);
-// app.use('/messages', messageRoutes);
+app.use('/movie', movieRoutes);
 // app.use('/contacts', contactRoutes);
 // app.use('/documents', documentRoutes);
 
 
 // establish a connection to the mongo database
-mongoose.connect('mongodb://localhost:27017/cms', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/movieReviews', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to database!');
   })
@@ -66,7 +66,7 @@ mongoose.connect('mongodb://localhost:27017/cms', { useNewUrlParser: true, useUn
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../cms/src/index.html'));
+  res.sendFile(path.join(__dirname, '../movieRatings/src/index.html'));
 });
 
 // Define the port address and tell express to use this port

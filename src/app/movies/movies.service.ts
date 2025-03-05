@@ -19,32 +19,64 @@ export class MoviesService {
     this.movies = this.getMovies();
     this.maxMovieId = this.getMaxId()
   }
-
-  getMovies(): Movie[]{
+  getMovies(): Movie[] {
     this.http.get<Movie[]>('http://localhost:3000/movie').subscribe((movies: Movie[]) => {
       this.movies = movies;
       this.maxMovieId = this.getMaxId();
-
       this.movies.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
       this.movieListChangedEvent.next(this.movies.slice());
-
     }, (error: any) => {
       console.error('Error fetching movies: ', error);
-    })
-    return this.movies.slice();
+    });
+    return this.movies.slice()
   }
+  
   getMovie(id: string): Movie {
     for (const movie of this.movies) {
       if (movie.id === id) {
         return movie;
       }
     }
-    return null; // PROBLEM: returning null
+    return null;
   }
-  // getMovie(id: string): Movie | undefined {
-  //   return this.movies.find(movie => movie.id === id);
-  // }
   
+  addMovie(movie: Movie) {
+    if (!movie) {
+      return;
+    }
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.http.post<{ message: string, movie: Movie }>('http://localhost:3000/movie',
+      movie,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          this.movies.push(responseData.movie);
+          this.sortAndSend();
+        }
+      );
+  }
+
+  updateMovie(originalMovie: Movie, newMovie: Movie) {
+    if (!originalMovie || !newMovie) {
+      return;
+    }
+    const pos = this.movies.findIndex(d => d.id === originalMovie.id);
+    if (pos < 0) {
+      return;
+    }
+
+    newMovie.id = originalMovie.id;
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    this.http.put('http://localhost:3000/movie/' + originalMovie.id,
+      newMovie, { headers: headers })
+      .subscribe(
+        (response: Response) => {
+          this.movies[pos] = newMovie;
+          this.sortAndSend();
+        }
+      );
+  }
   
   deleteMovie(movie: Movie) {
     if (!movie) {
@@ -54,8 +86,7 @@ export class MoviesService {
     if (pos < 0) {
       return;
     }
-    // delete from database
-    this.http.delete('http://localhost:3000/movies/' + movie.id)
+    this.http.delete('http://localhost:3000/movie/' + movie.id)
       .subscribe(
         (response: Response) => {
           this.movies.splice(pos, 1);
@@ -76,11 +107,11 @@ export class MoviesService {
   }
 
   sortAndSend() {
-    const moviesJSON = JSON.stringify(this.movies); // Convert documents to JSON string
+    const moviesJSON = JSON.stringify(this.movies);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  
+    
     this.http.put(
-      'http://localhost:3000/movies', // Use your local Node.js server URL
+      'http://localhost:3000/movie',
       moviesJSON,
       { headers }
     ).subscribe(
@@ -93,4 +124,5 @@ export class MoviesService {
       }
     );
   }
+  
 }

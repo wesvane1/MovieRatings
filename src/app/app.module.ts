@@ -15,6 +15,7 @@ import { MoviesFilterPipe } from './movies/movies.filter-pipe';
 import { MoviesService } from './movies/movies.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
   ],
   providers: [

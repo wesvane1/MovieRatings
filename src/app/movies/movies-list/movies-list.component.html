@@ -1,31 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading movie-list-head">
-    <div class="col-xs-6">
-      <h1>Movies</h1>
-    </div>
-    <div class="col-xs-6">
-      <button class="btn btn-success pull-right" routerLink="new">New Movie</button>
-    </div>
-      <div class="input-group col-xs-7 pad-left-right">
-        <span class="glyphicon glyphicon-search input-group-addon"></span>
-        <input
-          #searchBox
-          type="text"
-          class="form-control"
-          placeholder="Search movies..."
-          (input)="search(searchBox.value)"
-        />
-      </div>
+<div class="card shadow-sm">
+  <div class="card-header bg-light d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+    <h1 class="mb-3 mb-md-0">Movies</h1>
+    <button class="btn btn-success" routerLink="new">New Movie</button>
   </div>
 
-  <div class="panel-body">
-    <div class="col-xs-12">
-      <div class="list-group movies-list">
-        <app-movies-item
-          *ngFor="let movieElement of movieList | moviesFilter:term"
-          [movie]="movieElement">
-        </app-movies-item>
-      </div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+      <input
+        #searchBox
+        type="text"
+        class="form-control"
+        placeholder="Search movies..."
+        (input)="search(searchBox.value)"
+      />
+    </div>
+
+    <div class="list-group">
+      <app-movies-item
+        *ngFor="let movieElement of movieList | moviesFilter:term"
+        [movie]="movieElement">
+      </app-movies-item>
     </div>
   </div>
 </div>

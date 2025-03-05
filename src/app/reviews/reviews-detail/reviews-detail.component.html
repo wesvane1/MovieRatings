@@ -1,1 +1,14 @@
-<p>reviews-detail works!</p>
+<div class="card shadow-sm">
+  <div class="card-header bg-light d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Review Details</h5>
+    <div>
+      <a class="btn btn-primary btn-sm me-2" [routerLink]="['edit']">Edit</a>
+      <a class="btn btn-danger btn-sm" (click)="onDelete()">Delete</a>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h4 class="movie-title fw-bold">Title: {{ review.movieId }}</h4>
+    <!-- <p class="movie-description text-muted">Description: {{ movie.description }}</p> -->
+  </div>
+</div>

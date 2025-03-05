@@ -7,7 +7,8 @@
     </div>
   </div>
 
-  <div class="card-body">
+  <div class="card-body"
+    *ngFor="let review of reviewsForMovie">
     <h4 class="movie-title fw-bold">Title: {{ review.movieId }}</h4>
     <!-- <p class="movie-description text-muted">Description: {{ movie.description }}</p> -->
   </div>

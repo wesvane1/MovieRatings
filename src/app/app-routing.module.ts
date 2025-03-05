@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     {path: ':id', component: MoviesDetailComponent},
     {path: ':id/edit', component: MoviesEditComponent},
   ]},
-  {path: 'reviews', component: ReviewsComponent, children: [
+  {path: 'review', component: ReviewsComponent, children: [
     // {path: ':movieId/new', component: ContactEditComponent},
     {path: ':movieId', component: ReviewsDetailComponent},
     // {path: ':movieId/:reviewId/edit', component: ContactEditComponent},

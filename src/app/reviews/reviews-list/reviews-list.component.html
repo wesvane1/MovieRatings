@@ -20,7 +20,7 @@
     <div class="list-group">
       <app-reviews-item
         *ngFor="let movieElementReview of movieListReview | moviesFilter:term"
-        [movieReview]="movieElementReview">
+        [movie]="movieElementReview">
       </app-reviews-item>
     </div>
   </div>

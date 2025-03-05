@@ -9,6 +9,6 @@ import { Movie } from '../../movies/movies.model';
 })
 export class ReviewsItemComponent {
 
-  @Input() movieReview: Movie;
+  @Input() movie: Movie;
 
 }

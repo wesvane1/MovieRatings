@@ -1,46 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Review } from './review.model';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { MoviesService } from '../movies/movies.service';
+import { ObjectId } from 'mongodb'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewsService {
 
-  private reviewsForMovie: Review[] = [];
-  private maxReviewId = 0;
+  private allReviewsForMovie: Review[] = [];
   reviewForMovieSelectedEvent = new EventEmitter<Review>();
   reviewForMovieListChangedEvent = new Subject<Review[]>();
 
   constructor(
-    private http: HttpClient
-  ) {
-    // this.reviewsForMovie = this.getReviewsForMovie()
-    this.maxReviewId = this.getMaxId()
-  }
+    private http: HttpClient,
+    private movieService: MoviesService
+  ) {}
 
-  getReviewsForMovie(movieId: string): Review{
-    this.http.get<Review[]>('http://localhost:3000/reviews').subscribe((reviewsForMovie: Review[]) => {
-      this.reviewsForMovie = reviewsForMovie;
-      this.maxReviewId = this.getMaxId();
-      // this.reviewsForMovie.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
-      this.reviewForMovieListChangedEvent.next(this.reviewsForMovie.slice());
-    }, (error: any) => {
-      console.error('Error fetching reviews: ', error);
-    });
-    // return this.reviewsForMovie.slice()
-    return
-  }
-
-  getMaxId(): number{
-    let maxId = 0;
-
-    for (const review of this.reviewsForMovie){
-      if (+review.id > maxId){
-        maxId = +review.id;
-      }
+  getReviewsForMovie(movieId: string): Observable<Review[]> {
+    const movie = this.movieService.getMovie(movieId);
+    if (movie) {
+      return this.getReviewsFromMovieId(movie._id);
     }
-    return maxId;
+    return new Observable<Review[]>();  // return an empty observable if movie not found
+  }
+
+  getReviewsFromMovieId(movieId: ObjectId): Observable<Review[]> {
+    return new Observable<Review[]>((observer) => {
+      this.http.get<Review[]>('http://localhost:3000/review/' + movieId).subscribe(
+        (reviews: Review[]) => {
+          this.allReviewsForMovie = reviews;
+          observer.next(reviews);  // Emit the reviews
+          observer.complete();  // Complete the observable
+        },
+        error => {
+          console.error('Error fetching reviews:', error);
+          observer.error(error);  // Emit the error
+        }
+      );
+    });
   }
 }

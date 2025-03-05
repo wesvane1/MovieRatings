@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
 import { FormsModule } from '@angular/forms';
 import { ReviewsItemComponent } from './reviews/reviews-item/reviews-item.component';
+import { ReviewsService } from './reviews/reviews.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ReviewsItemComponent } from './reviews/reviews-item/reviews-item.compon
     HttpClientModule,
   ],
   providers: [
-    MoviesService
+    MoviesService,
+    ReviewsService
   ],
   bootstrap: [AppComponent]
 })

@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 
 var index = require('./src/app/server/routes/app');
 const movieRoutes = require('./src/app/server/routes/movies')
-// const contactRoutes = require('./src/app/server/routes/contacts')
+const reviewRoutes = require('./src/app/server/routes/reviews')
 // const documentRoutes = require('./src/app/server/routes/documents')
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'dist/movieRatings/browser')));
 // Tell express to map the default route ('/') to the index route
 app.use('/', index);
 app.use('/movie', movieRoutes);
-// app.use('/contacts', contactRoutes);
+app.use('/review', reviewRoutes);
 // app.use('/documents', documentRoutes);
 
 

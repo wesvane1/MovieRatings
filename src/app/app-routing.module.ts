@@ -5,6 +5,7 @@ import { MoviesDetailComponent } from './movies/movies-detail/movies-detail.comp
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsDetailComponent } from './reviews/reviews-detail/reviews-detail.component';
 import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
+import { ReviewsEditComponent } from './reviews/reviews-edit/reviews-edit.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/movie', pathMatch: 'full'},
@@ -14,9 +15,9 @@ const appRoutes: Routes = [
     {path: ':id/edit', component: MoviesEditComponent},
   ]},
   {path: 'review', component: ReviewsComponent, children: [
-    // {path: ':movieId/new', component: ContactEditComponent},
+    {path: ':movieId/new', component: ReviewsEditComponent},
     {path: ':movieId', component: ReviewsDetailComponent},
-    // {path: ':movieId/:reviewId/edit', component: ContactEditComponent},
+    {path: ':movieId/:reviewId/edit', component: ReviewsEditComponent},
   ]},
 ];
 

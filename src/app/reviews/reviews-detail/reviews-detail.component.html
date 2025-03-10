@@ -7,9 +7,19 @@
     </div>
   </div>
 
-  <div class="card-body"
-    *ngFor="let review of reviewsForMovie">
-    <h4 class="movie-title fw-bold">Title: {{ review.movieId }}</h4>
-    <!-- <p class="movie-description text-muted">Description: {{ movie.description }}</p> -->
+  <div class="card-body" *ngIf="reviewsForMovie.length > 0; else noReviews">
+    <div *ngFor="let review of reviewsForMovie; let i = index">
+      <hr>
+      <h4>Screen Name: {{ review.screenName }} says</h4>
+      <h4>Review {{ i + 1 }}: {{ review.textRating }}</h4>
+      <h4>Stars: {{ review.starRating }}</h4>
+      <hr>
+    </div>
   </div>
+  
+  <ng-template #noReviews>
+    <div class="text-center">
+      <p>No Reviews for this movie</p>
+    </div>
+  </ng-template>
 </div>

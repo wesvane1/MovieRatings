@@ -1,17 +1,15 @@
-import { ObjectId } from 'mongodb';
-
 export class Review {
   public id: string;
-  public movieId: ObjectId;
+  public movieId: string;
   public textRating: string;
-  public starRating: number;
+  public starRating: string;
   public screenName: string;
 
   constructor(
     id: string,
-    movieId: ObjectId,
+    movieId: string,
     textRating: string,
-    starRating: number,
+    starRating: string,
     screenName: string,
   ) {
     this.id = id;

@@ -32,12 +32,22 @@ export class MoviesService {
   }
   
   getMovie(id: string): Movie {
-    for (const movie of this.movies) {
-      if (movie.id === id) {
-        return movie;
+    if (this.movies){
+      for (const movie of this.movies) {
+        if (movie.id === id) {
+          return movie;
+        }
       }
+      return null;
+    } else {
+      this.getMovies()
+      for (const movie of this.movies) {
+        if (movie.id === id) {
+          return movie;
+        }
+      }
+      return null;
     }
-    return null;
   }
   
   addMovie(movie: Movie) {

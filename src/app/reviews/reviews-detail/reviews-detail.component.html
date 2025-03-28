@@ -2,17 +2,17 @@
   <div class="card-header bg-light d-flex justify-content-between align-items-center">
     <h5 class="mb-0">Review Details</h5>
     <div>
-      <a class="btn btn-primary btn-sm me-2" [routerLink]="['edit']">Edit</a>
-      <a class="btn btn-danger btn-sm" (click)="onDelete()">Delete</a>
+      <a class="btn btn-success btn-sm" [routerLink]="['/review/', movieId, 'new']">Add Review</a>
     </div>
   </div>
 
   <div class="card-body" *ngIf="reviewsForMovie.length > 0; else noReviews">
     <div *ngFor="let review of reviewsForMovie; let i = index">
-      <hr>
       <h4>Screen Name: {{ review.screenName }} says</h4>
       <h4>Review {{ i + 1 }}: {{ review.textRating }}</h4>
       <h4>Stars: {{ review.starRating }}</h4>
+      <a class="btn btn-primary btn-sm me-2" [routerLink]="['/review/', movieId, review.id, 'edit']">Edit Review</a>
+      <a class="btn btn-danger btn-sm me-2" (click)="onDelete(review.id)">Delete Review</a>
       <hr>
     </div>
   </div>

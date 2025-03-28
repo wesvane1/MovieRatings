@@ -43,6 +43,7 @@ export class MoviesEditComponent implements OnInit{
 
   onSubmit(form: NgForm){
     const value = form.value
+    console.log("MOVIE: ", value)
     let movie = new Movie(
       value.id,
       value.title,

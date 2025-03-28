@@ -1,1 +1,80 @@
-<p>reviews-edit works!</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form
+      id="contact-edit"
+      (ngSubmit)="onSubmit(f)"
+      #f="ngForm">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="screenName">Screen Name:</label>
+          <input
+            type="text"
+            id="screenName"
+            class="form-control required"
+            size="120"
+            max="120"
+            name="screenName"
+            [ngModel]="review?.screenName"
+            #screenName="ngModel"
+            required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="textRating">Review:</label>
+          <input
+            type="text"
+            id="textRating"
+            class="form-control required"
+            size="120"
+            max="255"
+            name="textRating"
+            [ngModel]="review?.textRating"
+            #textRating="ngModel"
+            required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="starRating">Star Rating:</label>
+          <select
+            id="starRating" 
+            class="form-control required"
+            name="starRating"
+            [ngModel]="review?.starRating"
+            type="string"
+            #starRating="ngModel"
+            required
+          >
+            <option value="" disabled selected>Select a rating</option>
+            <option value="1">1 ⭐️</option>
+            <option value="2">2 ⭐️</option>
+            <option value="3">3 ⭐️</option>
+            <option value="4">4 ⭐️</option>
+            <option value="5">5 ⭐️</option>
+          </select>
+        </div>
+      </div>
+
+      <div 
+        class="alert-danger"
+        *ngIf="(screenName.invalid && screenName.touched) || (textRating.invalid && textRating.touched) || (starRating.invalid && starRating.touched)">
+        <span>The Screen Name, Review, and Rating fields are all required.</span>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="f.invalid">Save</button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

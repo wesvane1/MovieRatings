@@ -27,7 +27,6 @@ export class ReviewsDetailComponent implements OnInit {
       this.reviewsSubscription = this.reviewService.getReviewsForMovie(this.movieId).subscribe(
         (reviews: Review[]) => {
           this.reviewsForMovie = reviews;
-          console.log("REVIEWS FE: ", this.reviewsForMovie);
         },
         error => {
           console.error("Error fetching reviews: ", error);
@@ -37,7 +36,6 @@ export class ReviewsDetailComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // Clean up the subscription when the component is destroyed
     if (this.reviewsSubscription) {
       this.reviewsSubscription.unsubscribe();
     }
@@ -46,10 +44,8 @@ export class ReviewsDetailComponent implements OnInit {
   onDelete(reviewId: string) {
     this.reviewService.deleteReview(reviewId);
     
-    // Optionally, you can manually remove the review from the UI without a page reload:
     this.reviewsForMovie = this.reviewsForMovie.filter(review => review.id !== reviewId);
     
-    // Navigate back to the reviews list (or any other route) after deletion
     this.router.navigate(['/review']);
   }
   

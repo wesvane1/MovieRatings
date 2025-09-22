@@ -44,7 +44,6 @@ export class ReviewsEditComponent {
 
   onSubmit(form: NgForm){
     const value = form.value
-    console.log("REVIEW: ", value)
     let review = new Review(
       value.id,
       this.movieId,
@@ -52,7 +51,6 @@ export class ReviewsEditComponent {
       value.starRating,
       value.screenName
     )
-    // console.log("REVIEW: ", review)
     if(this.editMode){
       this.reviewsService.updateReview(this.originalReview, review)
       this.onUpdate()

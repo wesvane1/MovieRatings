@@ -29,7 +29,7 @@ export class ReviewsService {
     } else{
       return
     }
-    return new Observable<Review[]>();  // return an empty observable if movie not found
+    return new Observable<Review[]>();
   }
 
   getAllReviews(): Review[]{
@@ -56,12 +56,12 @@ export class ReviewsService {
       this.http.get<Review[]>('http://localhost:3000/review/' + movieId).subscribe(
         (reviews: Review[]) => {
           this.allReviewsForMovie = reviews;
-          observer.next(reviews);  // Emit the reviews
-          observer.complete();  // Complete the observable
+          observer.next(reviews);
+          observer.complete();
         },
         error => {
           console.error('Error fetching reviews:', error);
-          observer.error(error);  // Emit the error
+          observer.error(error);
         }
       );
     });
@@ -72,28 +72,13 @@ export class ReviewsService {
       return;
     }
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log("HERE1: ", review)
-  
-    // Step 1: Create the review
-    // this.http.post<{ message: string, review: Review }>(`http://localhost:3000/review/${this.movieId}/new`, review, { headers: headers })
-    //   .subscribe(
-    //     (responseData) => {
-    //       console.log("HERE2")
-    //       this.allReviews.push(responseData.review);
-    //       this.sortAndSend();
-    //       this.addReviewToMovie(this.movieId, responseData.review.id);
-    //     },
-    //     (error) => {
-    //       console.error('Error adding review:', error);
-    //     }
-    //   );
+
     this.http.post<{ message: string, review: Review }>(
       `http://localhost:3000/review/${this.movieId}/new`, 
       review, 
       { headers: headers }
     ).subscribe(
       (responseData) => {
-        console.log("HERE2", responseData);
       },
       (error) => {
         console.error("Error adding review:", error);
@@ -152,9 +137,8 @@ export class ReviewsService {
     this.http.delete('http://localhost:3000/review/' + reviewId)
       .subscribe(
         (response: Response) => {
-          // After successful deletion, remove the review locally
           this.allReviews.splice(pos, 1);
-          this.sortAndSend();  // Re-sort the reviews and emit updated list
+          this.sortAndSend();
         },
         (error) => {
           console.error('Error deleting review:', error);
